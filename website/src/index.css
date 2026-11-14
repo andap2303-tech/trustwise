@@ -1,0 +1,138 @@
+@import 'tailwindcss';
+
+/* Design tokens — palette mixed from the Dribbble references:
+   ink pill CTAs, cream base, lavender halos, salmon + amber accents. */
+@theme {
+  /* Trustwise palette: navy + teal + mint, warm orange accent (matches the business plan PDF) */
+  --color-ink: #14213d;
+  --color-ink-soft: #34405a;
+  --color-muted: #5b6577;
+  --color-cream: #f4f7f5;
+  --color-sand: #e8efec;
+  --color-line: #dae4e0;
+  --color-lavender: #e0f2ec;
+  --color-lilac: #a8dccb;
+  --color-violet: #167a68;
+  --color-salmon: #d9682b;
+  --color-salmon-soft: #fbe7dc;
+  --color-amber: #e8b04b;
+  --color-amber-soft: #fcf2dc;
+  --color-gain: #1d8a5a;
+  --color-loss: #c8443a;
+  --color-lilac-strong: #6fc4a8;
+  --color-violet-soft: #3fb497;
+  --color-teal: #167a68;
+  --color-mint: #3fb497;
+  --color-on-accent: #ffffff;
+  --color-accent-2: #e8b04b;
+
+--font-display: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.5rem;
+  --shadow-soft: 0 1px 2px rgb(15 20 35 / 0.04), 0 8px 24px -8px rgb(15 20 35 / 0.1);
+  --shadow-lift: 0 2px 4px rgb(15 20 35 / 0.05), 0 24px 48px -16px rgb(15 20 35 / 0.18);
+
+  --animate-rise: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-grow: grow 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes grow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+/* BOARD PLAN THEME — switched on by <html data-theme="plus"> (see PlusContext).
+   Deep navy + gold + teal, for the paid Board plan demo. */
+:root[data-theme='plus'] {
+  --color-ink: #0b1530;
+  --color-ink-soft: #2a3553;
+  --color-muted: #535d74;
+  --color-cream: #f3f4f8;
+  --color-sand: #e6e9f1;
+  --color-line: #d8dce8;
+  --color-lavender: #e2ecf6;
+  --color-lilac: #b9cbe6;
+  --color-lilac-strong: #8eabd8;
+  --color-violet: #0f6e5d;
+  --color-violet-soft: #2f9c82;
+  --color-salmon: #b8862b;
+  --color-salmon-soft: #f6ecd6;
+  --color-amber: #d8a640;
+  --color-amber-soft: #f8efd8;
+  --color-gain: #1b7a50;
+  --color-loss: #c23b32;
+  --color-on-accent: #ffffff;
+  --color-accent-2: #0f6e5d;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+  h1, h2, h3 {
+    @apply font-display tracking-tight;
+    letter-spacing: -0.02em;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-violet);
+    outline-offset: 3px;
+    border-radius: 0.75rem;
+  }
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-[1100px] px-4 sm:px-6;
+}
+@utility card {
+  @apply rounded-card bg-white shadow-soft;
+}
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-[15px] font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-40;
+}
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 rounded-full border border-line bg-white/70 px-3 py-1 text-xs font-semibold tracking-wide text-ink-soft;
+}
+@utility halo {
+  @apply pointer-events-none absolute rounded-full blur-3xl;
+}
+
+@layer components {
+  .btn-primary {
+    @apply btn bg-ink text-white hover:bg-ink-soft active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply btn bg-sand text-ink hover:bg-line;
+  }
+  .btn-plus {
+    @apply btn bg-gradient-to-r from-salmon to-accent-2 text-on-accent shadow-soft hover:brightness-105 active:scale-[0.98];
+  }
+  .btn-outline {
+    @apply btn border border-line bg-white text-ink hover:border-ink;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
