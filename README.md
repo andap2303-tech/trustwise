@@ -6,7 +6,7 @@ Trustwise helps UK charity trustees answer one question:
 > *How much of our cash can we safely invest, in what, and how bad could a bad year be in pounds?*
 
 - **Five-pager (PDF):** [`Trustwise_Five_Pager.pdf`](Trustwise_Five_Pager.pdf)
-- **Live demo:** https://trustwiser.netlify.app/
+- **Live demo:** https://trustwise1.netlify.app/
 
 ## Repository structure
 | Folder / file | What it contains |
